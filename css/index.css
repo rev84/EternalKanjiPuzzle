@@ -50,6 +50,10 @@
   background-color: #000000;
   color: #ffffff;
 }
+.answer {
+  background-color: #ffffff;
+  color:#ff0000;
+}
 #char_pallet {
   overflow-y: scroll;
   height: 200px;
@@ -67,9 +71,8 @@
 }
 .loading {
   position: fixed;
-  margin: 0 auto;
-  width: 80%;
-  height: 80%;
+  top:50%;
+  left:50%;
   z-index: 999999999;
 }
 .no_display {

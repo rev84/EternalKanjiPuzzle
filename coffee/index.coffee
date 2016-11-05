@@ -1,23 +1,28 @@
 $().ready ->
   newGame()
   $('#regenerate').on 'click', newGame
+  $('#show_answer').on 'click', ->
+    window.board.showAnswer()
 
 newGame = ->
-  switchLoading true
+  showLoading()
 
   xy = Number $('#config_xy').val()
   openId = Number $('#config_open_id').val()
   countRankMax = Number $('#config_count_rank_max').val()
 
   window.board = new Board(xy, xy, openId, countRankMax)
-  
-  switchLoading false
 
-switchLoading = (bool)->
-  if bool
+  hideLoading()
+
+showLoading = ->
+  setTimeout(->
     $('.loading').removeClass('no_display')
-  else
+  , 1)
+hideLoading = ->
+  setTimeout(->
     $('.loading').addClass('no_display')
+  , 1)
 
 class Board
   CONST :
@@ -40,10 +45,19 @@ class Board
   directionX = null
   directionY = null
 
+  isGameEnd = false
+
   constructor:(@x, @y, @openId, @countRankMax)->
     @init()
     @initDraw()
     @open()
+
+  showAnswer:->
+    @isGameEnd = true
+    for x in [0...@x]
+      for y in [0...@y]
+        unless $('.char[xy="'+x+'_'+y+'"]').hasClass('locked')
+          $('.char[xy="'+x+'_'+y+'"]').html(@answerBoard[x][y]).addClass('answer')
 
   countRankMax2count:(countRankMax)->
     switch countRankMax
@@ -88,6 +102,7 @@ class Board
                .css('line-height', ''+(@CONST.CELL_SIZE)+'px')
                .on('click', ->
                   return if $(@).hasClass('locked')
+                  return if window.board.isGameEnd
                   $('.char').removeClass('choiced')
                   $(@).addClass('choiced')
                   window.board.drawCharPallet($(@).data('kakusuu'))
@@ -100,9 +115,9 @@ class Board
         # 横向き矢印
         if @directionX[x]? and @directionX[x][y]?
           if @directionX[x][y] is 0
-            img = $('<img>').attr('src', './img/left.png')
-          else
             img = $('<img>').attr('src', './img/right.png')
+          else
+            img = $('<img>').attr('src', './img/left.png')
           img.css('max-height', ''+(@CONST.CELL_SIZE/5)+'px')
              .css('max-width', ''+(@CONST.CELL_SIZE/5)+'px')
           td = $('<td>').addClass('arrow')
@@ -152,35 +167,35 @@ class Board
         for y in [0...@y]
           openCell.push [x, y]
       openCell = Utl.shuffle openCell
-      openCell.splice 0, Math.ceil(openCell.length*0.5)
+      openCell = openCell.splice 0, Math.ceil(openCell.length*0.5)
     # ランダム割合25
     else if @openId is @CONST.OPEN_ID.RANDOM_25
       for x in [0...@x]
         for y in [0...@y]
           openCell.push [x, y]
       openCell = Utl.shuffle openCell
-      openCell.splice 0, Math.ceil(openCell.length*0.25)
+      openCell = openCell.splice 0, Math.ceil(openCell.length*0.25)
     # ランダム個数3
     else if @openId is @CONST.OPEN_ID.RANDOM_3
       for x in [0...@x]
         for y in [0...@y]
           openCell.push [x, y]
       openCell = Utl.shuffle openCell
-      openCell.splice 0, 3
+      openCell = openCell.splice 0, 3
     # ランダム個数2
     else if @openId is @CONST.OPEN_ID.RANDOM_2
       for x in [0...@x]
         for y in [0...@y]
           openCell.push [x, y]
       openCell = Utl.shuffle openCell
-      openCell.splice 0, 2
+      openCell = openCell.splice 0, 2
     # ランダム個数1
     else if @openId is @CONST.OPEN_ID.RANDOM_1
       for x in [0...@x]
         for y in [0...@y]
           openCell.push [x, y]
       openCell = Utl.shuffle openCell
-      openCell.splice 0, 1
+      openCell = openCell.splice 0, 1
 
     for [x, y] in openCell
       $('.char[xy="'+x+'_'+y+'"]').addClass('locked').html(@answerBoard[x][y])
@@ -189,6 +204,7 @@ class Board
     $('#char_pallet').html('')
     for char in window.kakusuu2c[kakusuu]
       span = $('<span>').addClass('pallet').html(char).on('click', ->
+        return if window.board.isGameEnd
         $('.choiced').html($(@).html())
       )
       $('#char_pallet').append(span)
@@ -318,9 +334,9 @@ class Board
           isComplete = false if answerBoard[x][y] is null
       if isComplete
         break
-      @outputAnswerBoard answerBoard, directionX, directionY
+      #@outputAnswerBoard answerBoard, directionX, directionY
 
-    @outputAnswerBoard answerBoard, directionX, directionY
+    #@outputAnswerBoard answerBoard, directionX, directionY
 
     @directionX = directionX
     @directionY = directionY
