@@ -1,0 +1,28 @@
+array(2) {
+  [0]=>
+  array(5) {
+    [0]=>
+    string(82) "<td class="normalbg"><a href="http://kanji.jitenon.jp/kanji/001.html">一</a></td>"
+    [1]=>
+    string(84) "<td class="normalbg"><a href="http://kanji.jitenon.jp/kanjic/1329.html">乙</a></td>"
+    [2]=>
+    string(84) "<td class="normalbg"><a href="http://kanji.jitenon.jp/kanjil/5660.html">丶</a></td>"
+    [3]=>
+    string(84) "<td class="normalbg"><a href="http://kanji.jitenon.jp/kanjil/5703.html">丿</a></td>"
+    [4]=>
+    string(84) "<td class="normalbg"><a href="http://kanji.jitenon.jp/kanjil/5738.html">亅</a></td>"
+  }
+  [1]=>
+  array(5) {
+    [0]=>
+    string(56) "<a href="http://kanji.jitenon.jp/kanji/001.html">一</a>"
+    [1]=>
+    string(58) "<a href="http://kanji.jitenon.jp/kanjic/1329.html">乙</a>"
+    [2]=>
+    string(58) "<a href="http://kanji.jitenon.jp/kanjil/5660.html">丶</a>"
+    [3]=>
+    string(58) "<a href="http://kanji.jitenon.jp/kanjil/5703.html">丿</a>"
+    [4]=>
+    string(58) "<a href="http://kanji.jitenon.jp/kanjil/5738.html">亅</a>"
+  }
+}

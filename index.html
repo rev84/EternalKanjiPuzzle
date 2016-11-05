@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width">
+<title>Eternal Kanji Puzzle</title>
+<link rel="shortcut icon" href="favicon.ico">
+
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-2.2.1.min.js" integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00=" crossorigin="anonymous"></script>
+
+<!-- jQuery Plugin -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.1/jquery.datetimepicker.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.1/jquery.datetimepicker.min.js"></script>
+
+
+<!-- Bootstrap -->
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+<!-- mine -->
+<script src="./js/words.js"></script>
+<script src="./js/frequency.js"></script>
+<script src="./js/kakusuu.js"></script>
+<script src="./js/index.js"></script>
+<link rel="stylesheet" type="text/css" href="./css/index.css">
+
+
+</head>
+
+<body>
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="./">Eternal Kanji Puzzle</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <!-- 左側 -->
+      <!--
+      <ul class="nav navbar-nav">
+        <li><a href="#">リンク</a></li>
+      </ul>
+      -->
+
+      <!-- 右側 -->
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="https://github.com/rev84/" target="_blank">GitHub</a></li>
+        <li><a href="https://twitter.com/rev84" target="_blank">developed by @rev84</a></li>
+        <!--
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">ドロップダウン<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">ドロップダウンメニュー</a></li>
+          </ul>
+        </li>
+        -->
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+
+<div id="config">
+<div class="form-inline">
+  <div class="form-group">
+    <label for="config_xy">サイズ</label>
+    <select id="config_xy" class="form-control">
+      <option value="3">3x3</option>
+      <option value="4" selected>4x4</option>
+      <option value="5">5x5</option>
+      <option value="6">6x6</option>
+      <option value="7">7x7</option>
+      <option value="8">8x8</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="config_open_id">確定箇所</label>
+    <select id="config_open_id" class="form-control">
+      <option value="1" selected>市松模様</option>
+      <option value="2">対角線</option>
+      <option value="3">ランダムに半分</option>
+      <option value="4">ランダムに4分の1</option>
+      <option value="5">ランダム3</option>
+      <option value="6">ランダム2</option>
+      <option value="7">ランダム1</option>
+      <option value="8">なし</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="config_count_rank_max">出題単語</label>
+    <select id="config_count_rank_max" class="form-control">
+      <option value="10">頻出10%</option>
+      <option value="20" selected>頻出20%</option>
+      <option value="30">頻出30%</option>
+      <option value="40">頻出40%</option>
+      <option value="50">頻出50%</option>
+      <option value="60">頻出60%</option>
+      <option value="70">頻出70%</option>
+      <option value="80">頻出80%</option>
+      <option value="100">バーリトゥード</option>
+    </select>
+  </div>
+  <button id="regenerate" class="btn btn-primary">再生成</button>
+  <button id="judge" class="btn btn-success">審判</button>
+</div>
+</div>
+
+<div id="field">
+</div>
+
+<div id="char_pallet">
+</div>
+
+</div>
+
+<img src="./img/loading.gif" class="loading no_display">
+
+</body>
+</html>
